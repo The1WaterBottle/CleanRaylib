@@ -14,7 +14,7 @@ class TextureManager{
             // Loading loading icon
             Image LoadingImage = LoadImage("DATA/textures/misc/_loading.png");
             ImageResize(&LoadingImage, 256, 256);
-            LoadingTex = LoadTextureFromImage(LoadingImage);
+            Texture2D LoadingTex = LoadTextureFromImage(LoadingImage);
             UnloadImage(LoadingImage);
             Textures.push_back(LoadingTex);
 

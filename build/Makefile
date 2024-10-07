@@ -51,3 +51,15 @@ compile_cpp_web:
 	-s EXPORTED_FUNCTIONS=["_free","_malloc","_main"] -s EXPORTED_RUNTIME_METHODS=ccall \
 	&& echo ------------------------------------------------------------------------- \
 	&& echo Compiled projcet for Web successfully \
+
+compile_cpp_andoid:
+	ANDROID_ARCH           ?= ARM
+	ANDROID_API_VERSION     = 28
+
+	JAVA_HOME              ?= C:/open-jdk
+	ANDROID_HOME           ?= C:/android-sdk
+	ANDROID_NDK            ?= C:/android-ndk
+	ANDROID_TOOLCHAIN      ?= $(ANDROID_NDK)/toolchains/llvm/prebuilt/windows-x86_64
+	ANDROID_BUILD_TOOLS    ?= $(ANDROID_HOME)/build-tools/29.0.3
+	ANDROID_PLATFORM_TOOLS  = $(ANDROID_HOME)/platform-tools
+	

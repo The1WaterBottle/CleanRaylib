@@ -29,9 +29,6 @@ void renderPauseMenu(){
     } 
 }
 
-// Game logic pre definitions
-void ResetBall();
-
 void renderMainGame(Camera2D Cam = {0}){
     //* Begin rendering    
     // BeginMode2D(Cam); // stuff inside BeginMode2D() will move (world, enemies, ...)
