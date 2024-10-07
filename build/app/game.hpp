@@ -13,7 +13,18 @@ void drawLoadingScreen(){
     }
 }
 
+Texture2D _background;
 void renderPauseMenu(){
+    if(isGamePaused) {
+        if(IsKeyPressed(KEY_ESCAPE)){
+            isGamePaused = false;
+        }
+    }
+    // draw blurry background    
+    BeginShaderMode(ShaderMan.Shaders[SHADER_BLUR]);
+        DrawTexture(_background, 0, 0, RAYWHITE);
+    EndShaderMode();
+
     DrawRectangle(0, 0, GetScreenW(), GetScreenH(), TRANSPARENT_GRAY); // Transparent gray background
     drawTextUV("Paused", 0.01f, 0.01f, 60);
 

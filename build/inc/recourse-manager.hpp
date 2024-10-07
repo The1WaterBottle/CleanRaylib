@@ -71,3 +71,43 @@ class TextureManager{
             LoadedImages = true;
         }
 };TextureManager TexMan;
+
+// Shaders
+typedef enum {
+    SHADER_BLUR = 0,
+    SHADER_PIXELIZER
+} ShaderIndexes;
+
+class ShaderManager{
+    public:
+        vector<Shader> Shaders;  // Vector to store all models
+        bool LoadedShaders = false;
+
+        void LoadShaders(){
+            ConsoleWrite("[ RUNNING ] Loading all shaders...");
+            // start shader loading
+            // first is Vertex seconds is Fragment shaders
+            // Shaders.push_back(LoadShader(0, TextFormat("DATA/shaders/glsl%i/blur.fs", GLSL_VERSION))); // example
+            Shaders.push_back(LoadShader(0, TextFormat("DATA/shaders/glsl%i/blur.fs", GLSL_VERSION)));
+            Shaders.push_back(LoadShader(0, TextFormat("DATA/shaders/glsl%i/pixelizer.fs", GLSL_VERSION)));
+
+            LoadedShaders = true;
+        }
+
+        void UnloadShaders(){
+            ConsoleWrite("[ RUNNING ] Unloading all shaders...");
+            // start shader unloading thread
+            load_shaders = thread(&ShaderManager::unload_shaders_via_thread, this);
+            load_shaders.detach(); // detach so main thread still runs
+        }
+
+    private:
+        thread load_shaders;
+
+        void unload_shaders_via_thread(){
+            for(Shader shdr : Shaders){
+                UnloadShader(shdr);
+            }
+            LoadedShaders = false;
+        }
+};ShaderManager ShaderMan;

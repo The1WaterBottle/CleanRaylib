@@ -11,6 +11,8 @@
 #include <future>       // for async multithreading
 #include <mutex>        // for locking/unlocking threads access to data
 
+// #define GLSL_VERSION 100
+
 // debug
 using std::cout;
 using std::cerr;
