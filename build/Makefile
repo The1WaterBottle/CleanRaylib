@@ -9,11 +9,17 @@ EXTENSION = exe
 
 # Default GLSL_VERSION based on PLATFORM
 ifeq ($(PLATFORM), Win)
-    GLSL_VERSION := 330
+    GLSL_VERSION  := 330
+    PLATFORM_FLAG := -DPLATFORM_WINDOWS
 else ifeq ($(PLATFORM), Web)
-    GLSL_VERSION := 100
+    GLSL_VERSION  := 100
+    PLATFORM_FLAG := -DPLATFORM_WEB
+else ifeq ($(PLATFORM), Linux)
+    GLSL_VERSION  := 330
+    PLATFORM_FLAG := -DPLATFORM_LINUX
 else
-    GLSL_VERSION := 330  # Default for other platforms
+    GLSL_VERSION  := 330 # Default for other platforms
+    PLATFORM_FLAG := -DPLATFORM_WEB
 endif
 
 # Conditional compilation based on PLATFORM variable
@@ -24,7 +30,7 @@ else ifeq ($(PLATFORM), Win)
 else ifeq ($(PLATFORM), Web)
     compile_cpp: compile_cpp_web
 else ifeq ($(PLATFORM), All)
-    compile_cpp: compile_cpp_linux compile_cpp_windows
+    compile_cpp: compile_cpp_linux compile_cpp_web compile_cpp_windows
 else
     $(error Unsupported platform specified: $(PLATFORM))
 endif

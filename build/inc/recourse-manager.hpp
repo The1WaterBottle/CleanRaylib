@@ -84,7 +84,7 @@ class ShaderManager{
         bool LoadedShaders = false;
 
         void LoadShaders(){
-            ConsoleWrite("[ RUNNING ] Loading all shaders...");
+            ConsoleWrite("[ SHADERMAN - RUNNING ] Loading all shaders...");
             // start shader loading
             // first is Vertex seconds is Fragment shaders
             // Shaders.push_back(LoadShader(0, TextFormat("DATA/shaders/glsl%i/blur.fs", GLSL_VERSION))); // example
@@ -93,18 +93,29 @@ class ShaderManager{
 
             LoadedShaders = true;
         }
-
         void UnloadShaders(){
-            ConsoleWrite("[ RUNNING ] Unloading all shaders...");
+            ConsoleWrite("[ SHADERMAN - RUNNING ] Unloading all shaders...");
             // start shader unloading thread
-            load_shaders = thread(&ShaderManager::unload_shaders_via_thread, this);
-            load_shaders.detach(); // detach so main thread still runs
+            // unload_shaders_thread = thread(&ShaderManager::unload_shaders, this);
+            // unload_shaders_thread.detach(); // detach so main thread still runs
+            #ifdef PLATFORM_WINDOWS
+                ConsoleWrite("TEST ME DADDY1");
+                unload_shaders_thread = thread(&ShaderManager::unload_shaders, this);
+                unload_shaders_thread.detach();
+            #elif defined(PLATFORM_LINUX)
+                unload_shaders_thread = thread(&ShaderManager::unload_shaders, this);
+                unload_shaders_thread.detach();
+            #elif defined(PLATFORM_WEB)
+                unload_shaders();  // No threading in web builds
+            #else
+                unload_shaders();  // Default behavior for other platforms
+            #endif
         }
 
     private:
-        thread load_shaders;
+        thread unload_shaders_thread;
 
-        void unload_shaders_via_thread(){
+        void unload_shaders(){
             for(Shader shdr : Shaders){
                 UnloadShader(shdr);
             }

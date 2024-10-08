@@ -6,10 +6,10 @@
 Rectangle StartAligner = { 0.02f, 0.3f, 250.0f, 80.0f };
 bool StartBtn = false, SettingsBtn = false, LoadBtn = false, ExitBtn = false;
 
-void start_game(){
-    
+void start_game(){    
     InitThreadByID(THREAD_GAME_CONTROLLS);
     TexMan.LoadTextures();
+    ShaderMan.LoadShaders();
     ScreenIndex = 5;
 }
 void open_settings(){

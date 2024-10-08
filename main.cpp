@@ -66,9 +66,8 @@ int main(void){
     }
 
     // Unload textures, stop threads, close window and OpenGL context then exit program
-    if(TexMan.LoadedTextures){
-        TexMan.UnloadTextures();
-    }
+    if(TexMan.LoadedTextures)   TexMan.UnloadTextures();
+    if(ShaderMan.LoadedShaders) ShaderMan.UnloadShaders();
     StopThreads();
     CloseWindow();
     return 0;
