@@ -53,9 +53,9 @@ void drawTriangleWithUV(Vector2By3 Vec2By3 = {Vector2{0, 0}, Vector2{0.01f, 0}, 
 // --- Logic --- :
 
 // check if mouse is over button and change the cursor accordingly
-void changeMouseCursor(float x, float  y, float  width, float  height){
-    CheckCollisionPointRec(GetMousePosition(), RecWithUV(x, y, width, height)) ? SetMouseCursor(MOUSE_CURSOR_POINTING_HAND) : SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-}
+// void changeMouseCursor(float x, float  y, float  width, float  height){ // DOESNT WORK FOR NOW
+//     CheckCollisionPointRec(GetMousePosition(), Rectangle{x, y, width, height}) ? SetMouseCursor(MOUSE_CURSOR_POINTING_HAND) : SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+// }
 ColorPair changeColors(float x, float  y, float  width, float  height){
     if(CheckCollisionPointRec(GetMousePosition(), RecWithUV(x, y, width, height))){
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
@@ -83,23 +83,20 @@ void drawTextureProUV(Texture2D Tex, Rectangle source = {0, 0, 256, 256}, Rectan
 
 // Toggleable button : Normalised (0-1) UVs to draw a toggle button 
 // Has defaults so it can be called without parameters
-bool drawToggleUV(bool &Boolean, const char* Txt = "Toggle", int FontSize = 40, Rectangle StandartRect = {0.01f, 0.01f, 240, 80}, void (*loopFunc)() = &NullFunc, void (*clickFunc)() = &NullFunc){
-    // create a temp rec with all UV coords
-    Rectangle RecUVs = { StandartRect.x, StandartRect.y, ScreenToU(StandartRect.width), ScreenToV(StandartRect.height) };
-
-    changeMouseCursor(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height);
+bool drawToggleUV(bool &Boolean, const char* Txt = "Toggle", int FontSize = 40, Rectangle StandartRect = {0.01f, 0.01f, 240, 80}, void (*loopFunc)() = &NullFunc, void (*clickFunc)() = &NullFunc, Font font = GetFontDefault()){
+    // changeMouseCursor(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height);
     ColorPair CPair = changeColors(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height);
 
     // draw btn components
     if(Boolean){
         drawRecWithUV(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height, ColDarkBlue);
-        drawResponsiveRecWithUV(RecUVs.x + ScreenToU(2), RecUVs.y + ScreenToV(2), RecUVs.width-StandartRect.x - ScreenToU(6), RecUVs.height-StandartRect.y-ScreenToV(6), ColLightBlue); 
-        DrawText(Txt, UToScreen(StandartRect.x + ScreenToU(8)), VToScreen(StandartRect.y + ScreenToV(8)), FontSize, ColDarkBlue);
+        drawResponsiveRecWithUV(StandartRect.x + ScreenToU(1), StandartRect.y + ScreenToV(1), ScreenToU(StandartRect.width)-StandartRect.x-ScreenToU(3), ScreenToV(StandartRect.height)-StandartRect.y-ScreenToV(3), ColLightBlue); 
+        DrawTextEx(font, Txt, Vector2{UToScreen(StandartRect.x)+StandartRect.width/2 - MeasureText(Txt, FontSize)/2 +8, VToScreen(StandartRect.y) + 8}, FontSize, 1.0f, ColDarkBlue);
         loopFunc();
     } else {
         drawRecWithUV(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height, CPair.Color_Two);
-        drawResponsiveRecWithUV(RecUVs.x + ScreenToU(2), RecUVs.y + ScreenToV(2), RecUVs.width-StandartRect.x - ScreenToU(6), RecUVs.height-StandartRect.y-ScreenToV(6), CPair.Color_One); 
-        DrawText(Txt, UToScreen(StandartRect.x + ScreenToU(8)), VToScreen(StandartRect.y + ScreenToV(8)), FontSize, CPair.Color_Two);
+        drawResponsiveRecWithUV(StandartRect.x + ScreenToU(1), StandartRect.y + ScreenToV(1), ScreenToU(StandartRect.width)-StandartRect.x-ScreenToU(3), ScreenToV(StandartRect.height)-StandartRect.y-ScreenToV(3), CPair.Color_One);
+        DrawTextEx(font, Txt, Vector2{UToScreen(StandartRect.x)+StandartRect.width/2 - MeasureText(Txt, FontSize)/2 +8, VToScreen(StandartRect.y) + 8}, FontSize, 1.0f, CPair.Color_Two);
     }
 
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
@@ -114,23 +111,18 @@ bool drawToggleUV(bool &Boolean, const char* Txt = "Toggle", int FontSize = 40, 
 // Standart Button : Normalised (0-1) UVs to draw a button
 // Has defaults so it can be called without parameters
 bool drawButtonUV(bool Boolean = false, const char* Txt = "Button", int FontSize = 40, Rectangle StandartRect = {0.01f, 0.01f, 240, 80}, void (*clickFunc)() = &NullFunc, Font font = GetFontDefault()){
-    // create a temp rec with all UV coords
-    Rectangle RecUVs = { StandartRect.x, StandartRect.y, ScreenToU(StandartRect.width), ScreenToV(StandartRect.height) };
-
-    changeMouseCursor(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height);
+    // changeMouseCursor(UToScreen(StandartRect.x), VToScreen(StandartRect.y), StandartRect.width, StandartRect.height);
     ColorPair CPair = changeColors(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height);
     
     if(Boolean){ // draw btn components
         drawRecWithUV(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height, ColDarkBlue);
-        drawResponsiveRecWithUV(RecUVs.x + ScreenToU(2), RecUVs.y + ScreenToV(2), RecUVs.width-StandartRect.x - ScreenToU(6), RecUVs.height-StandartRect.y-ScreenToV(6), ColLightBlue); 
-        // DrawText(Txt, UToScreen(StandartRect.x + ScreenToU(8)), VToScreen(StandartRect.y + ScreenToV(8)), FontSize, ColDarkBlue);
-        DrawTextEx(font, Txt, Vector2{UToScreen(StandartRect.x + ScreenToU(8)), VToScreen(StandartRect.y + ScreenToV(8))}, FontSize, 1.0f, ColDarkBlue);
+        drawResponsiveRecWithUV(StandartRect.x + ScreenToU(1), StandartRect.y + ScreenToV(1), ScreenToU(StandartRect.width)-StandartRect.x - ScreenToU(3), ScreenToV(StandartRect.height)-StandartRect.y-ScreenToV(3), ColLightBlue); 
+        DrawTextEx(font, Txt, Vector2{UToScreen(StandartRect.x)+StandartRect.width/2 - MeasureText(Txt, FontSize)/2 +8, VToScreen(StandartRect.y) + 8}, FontSize, 1.0f, ColDarkBlue);
         Boolean = !Boolean;
     } else {
         drawRecWithUV(StandartRect.x, StandartRect.y, StandartRect.width, StandartRect.height, CPair.Color_Two);
-        drawResponsiveRecWithUV(RecUVs.x + ScreenToU(2), RecUVs.y + ScreenToV(2), RecUVs.width-StandartRect.x - ScreenToU(6), RecUVs.height-StandartRect.y-ScreenToV(6), CPair.Color_One); 
-        // DrawText(Txt, UToScreen(StandartRect.x + ScreenToU(8)), VToScreen(StandartRect.y + ScreenToV(8)), FontSize, CPair.Color_Two);
-        DrawTextEx(font, Txt, Vector2{UToScreen(StandartRect.x + ScreenToU(8)), VToScreen(StandartRect.y + ScreenToV(8))}, FontSize, 1.0f, CPair.Color_Two);
+        drawResponsiveRecWithUV(StandartRect.x + ScreenToU(1), StandartRect.y + ScreenToV(1), ScreenToU(StandartRect.width)-StandartRect.x - ScreenToU(3), ScreenToV(StandartRect.height)-StandartRect.y-ScreenToV(3), CPair.Color_One); 
+        DrawTextEx(font, Txt, Vector2{UToScreen(StandartRect.x)+StandartRect.width/2 - MeasureText(Txt, FontSize)/2 +8, VToScreen(StandartRect.y) + 8}, FontSize, 1.0f, CPair.Color_Two);
     }
 
     if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
@@ -199,13 +191,17 @@ void drawInputBoxUV(unsigned short &letterCount, char *Text = nullptr, int font_
 }
 
 // Confirmation box : Normalised (0-1) UVs to draw a confirmation box with yes and no buttons
-bool YesBtn = false, NoBtn = false;
+
 short drawConfirmationBox(const char* Txt, int fontSize, Rectangle ConfBoxRec = { 0, 0, 500, 350}, Color TxtColor = ColDarkGray){
+    static bool YesBtn = false, NoBtn = false;
+    
     drawRecWithUV(ConfBoxRec.x, ConfBoxRec.y, ConfBoxRec.width, ConfBoxRec.height, GRAY); // background rec
     drawResponsiveRecWithUV(ConfBoxRec.x + ScreenToU(4), ConfBoxRec.y + ScreenToV(4), ScreenToU(ConfBoxRec.width-12)-ConfBoxRec.x, ScreenToV(ConfBoxRec.height-12)-ConfBoxRec.y, LIGHTGRAY); 
     drawTextUV(Txt, ConfBoxRec.x + ScreenToU(ConfBoxRec.width)/2 - ScreenToU(MeasureText(Txt, fontSize)/2), ConfBoxRec.y + ScreenToV(50), fontSize, TxtColor);
-    YesBtn = drawButtonUV(YesBtn, "Yes", 42, Rectangle{ConfBoxRec.x+ScreenToU(50), ConfBoxRec.y+ScreenToV(240), 140, 60});
+    
+    YesBtn = drawButtonUV(YesBtn, "Yes", 42, Rectangle{ConfBoxRec.x+ScreenToU(50),  ConfBoxRec.y+ScreenToV(240), 140, 60});
     NoBtn  = drawButtonUV(NoBtn , "No" , 42, Rectangle{ConfBoxRec.x+ScreenToU(300), ConfBoxRec.y+ScreenToV(240), 140, 60});
+    
     if(YesBtn) return 1;
     else if(NoBtn) return 2;
     else return 0;

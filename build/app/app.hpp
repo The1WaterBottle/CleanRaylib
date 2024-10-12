@@ -8,8 +8,8 @@ bool StartBtn = false, SettingsBtn = false, LoadBtn = false, ExitBtn = false;
 
 void start_game(){    
     InitThreadByID(THREAD_GAME_CONTROLLS);
-    TexMan.LoadTextures();
-    ShaderMan.LoadShaders();
+    if(!TexMan.LoadedTextures) TexMan.LoadTextures();
+    if(!ShaderMan.LoadedShaders) ShaderMan.LoadShaders();
     ScreenIndex = 5;
 }
 void open_settings(){
@@ -105,7 +105,7 @@ float rot = 0.0f;
 // Pause menu
 Rectangle PauseAligner = { 0.02f, 0.23f, 250, 70 };
 bool ResumeBtn = false, SettingsFromGameBtn = false, SaveBtn = false, LoadBtnPause = false, BackToMenuBtn = false, CompleteExitBtn = false;
-bool quitNo = false;
+short DoQuit = false;
 
 void ResumeGame(){
     isGamePaused = false;
@@ -123,8 +123,18 @@ void LoadFromGame(){
 }
 void BackToMenu(){
     StopThreadByID(THREAD_GAME_CONTROLLS);
+    isGamePaused = false;
     ScreenIndex = 1;
 }
 void exit(){
-    _MAIN_GAME_LOOP = false;
+    if(CompleteExitBtn){
+        DoQuit = drawConfirmationBox("Are you sure?\n\n\nproggress may be lost", 43, Rectangle{ScreenToU(GetScreenW()/3), 0.28f, GetScreenW()/3, 350});
+    }
+
+    if(DoQuit == 2){
+        DoQuit = false;
+        CompleteExitBtn = false;
+    } else if (DoQuit == 1){
+        _MAIN_GAME_LOOP = false;
+    }
 }

@@ -22,7 +22,7 @@ using std::thread;
 using std::ref;
 using std::mutex;
 using std::unique_lock;
-using std::lock_guard;
+using std::lock_guard;  
 // file handling
 using std::fstream;
 using std::vector;

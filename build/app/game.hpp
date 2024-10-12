@@ -28,16 +28,12 @@ void renderPauseMenu(){
     DrawRectangle(0, 0, GetScreenW(), GetScreenH(), TRANSPARENT_GRAY); // Transparent gray background
     drawTextUV("Paused", 0.01f, 0.01f, 60);
 
-    ResumeBtn = drawButtonUV(ResumeBtn, "Resume", 44, Rectangle{ 0.02f, 0.23f, 250, 70 }, &ResumeGame);
+    ResumeBtn = drawButtonUV(ResumeBtn, "Resume", 47, Rectangle{ 0.02f, 0.23f, 250, 70 }, &ResumeGame);
     SettingsFromGameBtn = drawButtonUV(SettingsFromGameBtn, "Settings", 40, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(85), PauseAligner.width, PauseAligner.height }, &SettingsFromGame);
-    SaveBtn = drawButtonUV(SaveBtn, "Save", 44, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(170), PauseAligner.width, PauseAligner.height }, &SavingMenu);
-    LoadBtnPause = drawButtonUV(LoadBtnPause, "Load", 44, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(255), PauseAligner.width, PauseAligner.height }, &LoadFromGame);
-    BackToMenuBtn = drawButtonUV(BackToMenuBtn, "Main menu", 44, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(340), PauseAligner.width, PauseAligner.height }, &BackToMenu);
-    CompleteExitBtn = drawToggleUV(CompleteExitBtn, "Quit Game", 44, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(425), PauseAligner.width, PauseAligner.height }, &exit);
-    if(quitNo){
-        quitNo = false;
-        CompleteExitBtn = false;
-    } 
+    SaveBtn = drawButtonUV(SaveBtn, "Save", 47, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(170), PauseAligner.width, PauseAligner.height }, &SavingMenu);
+    LoadBtnPause = drawButtonUV(LoadBtnPause, "Load", 47, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(256), PauseAligner.width, PauseAligner.height }, &LoadFromGame);
+    BackToMenuBtn = drawButtonUV(BackToMenuBtn, "Main menu", 47, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(340), PauseAligner.width, PauseAligner.height }, &BackToMenu);
+    CompleteExitBtn = drawToggleUV(CompleteExitBtn, "Quit Game", 47, Rectangle{ PauseAligner.x, PauseAligner.y + ScreenToV(425), PauseAligner.width, PauseAligner.height }, &exit);
 }
 
 void renderMainGame(Camera2D Cam = {0}){

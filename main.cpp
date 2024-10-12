@@ -49,7 +49,7 @@ int main(void){
                 }
                 break;
 
-            default: // Tiny error handling
+            default: // Tiny error correction
                 ConsoleWrite("\n[ WARNING ] Something went wrong but no worries!\n");
                 ScreenIndex = 1;
                 break;

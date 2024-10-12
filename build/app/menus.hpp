@@ -2,10 +2,10 @@
 
 // Main menu
 void drawMainMenu(){
-    StartBtn = drawButtonUV(StartBtn, "Start", 52, StartAligner, &start_game);
-    SettingsBtn = drawButtonUV(SettingsBtn, "Settings", 52, Rectangle{ StartAligner.x, StartAligner.y + ScreenToV(100), StartAligner.width, StartAligner.height }, &open_settings);
-    LoadBtn = drawButtonUV(LoadBtn, "Load", 52, Rectangle{ StartAligner.x, StartAligner.y + ScreenToV(200), StartAligner.width, StartAligner.height }, &open_load_menu);
-    ExitBtn = drawButtonUV(ExitBtn, "Exit", 52, Rectangle{ StartAligner.x, StartAligner.y + ScreenToV(300), StartAligner.width, StartAligner.height }, &quick_exit);
+    StartBtn    = drawButtonUV(StartBtn,    "Start",    72, Rectangle{ StartAligner.x, StartAligner.y - ScreenToV(35),  StartAligner.width+26, StartAligner.height+25 }, &start_game);
+    SettingsBtn = drawButtonUV(SettingsBtn, "Settings", 52, Rectangle{ StartAligner.x, StartAligner.y + ScreenToV(80),  StartAligner.width,    StartAligner.height }, &open_settings);
+    LoadBtn     = drawButtonUV(LoadBtn,     "Load",     52, Rectangle{ StartAligner.x, StartAligner.y + ScreenToV(170), StartAligner.width,    StartAligner.height }, &open_load_menu);
+    ExitBtn     = drawButtonUV(ExitBtn,     "Exit",     52, Rectangle{ StartAligner.x, StartAligner.y + ScreenToV(260), StartAligner.width,    StartAligner.height }, &quick_exit);
 }
 
 // Settings menu
@@ -15,8 +15,8 @@ void drawSettings(){
 
     // --- screen ---
     ScreenTab = drawToggleUV(ScreenTab, "Screen", 50, Rectangle{SettingsAligner.x, SettingsAligner.y + ScreenToV(140), 220, 60}, &NullFunc, &ClsBools_ScreenTab);
-    SoundTab  = drawToggleUV(SoundTab, "Sound", 50, Rectangle{SettingsAligner.x, SettingsAligner.y + ScreenToV(220), 220, 60},   &NullFunc, &ClsBools_SoundTab);
-    AboutTab  = drawToggleUV(AboutTab, "About", 50, Rectangle{SettingsAligner.x, SettingsAligner.y + ScreenToV(300), 220, 60},   &NullFunc, &ClsBools_AboutTab);
+    SoundTab  = drawToggleUV(SoundTab,  "Sound",  50, Rectangle{SettingsAligner.x, SettingsAligner.y + ScreenToV(220), 220, 60}, &NullFunc, &ClsBools_SoundTab);
+    AboutTab  = drawToggleUV(AboutTab,  "About",  50, Rectangle{SettingsAligner.x, SettingsAligner.y + ScreenToV(300), 220, 60}, &NullFunc, &ClsBools_AboutTab);
 
     Rectangle TabRec = { SettingsAligner.x + ScreenToU(248), SettingsAligner.y + ScreenToV(72), ScreenToU(GetScreenW())-(SettingsAligner.x + ScreenToU(270)), ScreenToV(GetScreenH())-(SettingsAligner.y + ScreenToV(80)) };
     drawRecLinesWithUV(TabRec, ColLightGray);
