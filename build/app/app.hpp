@@ -26,7 +26,7 @@ void quick_exit(){
 // Settings menu
 Rectangle SettingsAligner = { 0.01f, 0.02f, 120.0f, 50.0f };
 bool Settings_BackBtn = false, applyBtn = false, SettingsFromGameBool = false, isScreenReInit = false; 
-bool ScreenTab = false, SoundTab = false, AboutTab = false;
+bool ScreenTab = true, SoundTab = false, AboutTab = false;
 
 void SaveSettings(){
 

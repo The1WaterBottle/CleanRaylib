@@ -10,7 +10,7 @@ bool createFolder(std::filesystem::path directory){
 }
 
 // Create a file with a given name plus extension
-bool createFile(std::filesystem::path location = "../saves/", std::filesystem::path file = "save_game", std::filesystem::path extension = "txt"){
+bool createFile(std::filesystem::path location = "DATA/saves/", std::filesystem::path file = "save_game", std::filesystem::path extension = "txt"){
     std::filesystem::path tempFile = "";
     tempFile += location;
     tempFile += file;
