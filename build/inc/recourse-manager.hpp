@@ -99,7 +99,6 @@ class ShaderManager{
             // unload_shaders_thread = thread(&ShaderManager::unload_shaders, this);
             // unload_shaders_thread.detach(); // detach so main thread still runs
             #ifdef PLATFORM_WINDOWS
-                ConsoleWrite("TEST ME DADDY1");
                 unload_shaders_thread = thread(&ShaderManager::unload_shaders, this);
                 unload_shaders_thread.detach();
             #elif defined(PLATFORM_LINUX)

@@ -1,13 +1,14 @@
 void InitWindow(){ // Create window
+    LoadSettings();
     ConsoleWrite("[ RUNNING ] Initializing Window...");
     if(isMSAA4X) SetConfigFlags(FLAG_MSAA_4X_HINT);
     if(isVSync) SetConfigFlags(FLAG_VSYNC_HINT);
     if(isFullscreen){
-        InitWindow(1600, 900, "Game - v0.0.1");
+        InitWindow(1280, 720, "Game - v0.0.1");
         ToggleFullscreen();
     } else {
         SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-        InitWindow(1600, 900, "Game - v0.0.1");
+        InitWindow(screenReses[currentScreenRes].x, screenReses[currentScreenRes].y, "Game - v0.0.1");
         SetWindowMinSize(1024, 768);
     }
     SetWindowTitle("The Enchanted Realm - v0.0.1");

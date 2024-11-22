@@ -25,6 +25,8 @@ using std::unique_lock;
 using std::lock_guard;  
 // file handling
 using std::fstream;
+using std::ofstream;
+using std::ifstream;
 using std::vector;
 using std::string;
 

@@ -12,7 +12,7 @@ float GetScreenH(){ return float(GetScreenHeight()); }
 
 // --- single var conversion --- :
 // convert screen coord x to U coordinate and back
-float ScreenToU(int ScreenX) {
+float ScreenToU(float ScreenX) {
     float u = static_cast<float>(ScreenX) / static_cast<float>(ScreenWidth);
     return u;
 }
@@ -21,7 +21,7 @@ float UToScreen(float u) {
     return ScreenX;
 }
 // convert screen coord y to V coordinate and back
-float ScreenToV(int ScreenY) {
+float ScreenToV(float ScreenY) {
     float v = static_cast<float>(ScreenY) / static_cast<float>(ScreenHeight);
     return v;
 }

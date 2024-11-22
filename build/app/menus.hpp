@@ -23,13 +23,16 @@ void drawSettings(){
 
     if(ScreenTab){ // display screen settings
         drawTextUV("Screen settings", SettingsAligner.x + ScreenToU(265), SettingsAligner.y, 60);
-        isFullscreen = drawToggleUV(isFullscreen, "Fullscreen", 40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(90), 250, SettingsAligner.height }, &ToggleScreenReInit);
-        isMSAA4X     = drawToggleUV(isMSAA4X    , "MSAA 4x",    40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(150), 250, SettingsAligner.height }, &ToggleScreenReInit);
+        SelectedScreenResInc = drawButtonUV(SelectedScreenResInc, ">", 48, Rectangle{SettingsAligner.x + ScreenToU(MeasureText(ScreenResolutions[selectedScreenRes], 58)+375), SettingsAligner.y + ScreenToV(90), 80, SettingsAligner.height}, &incSelectedScreenRes);
+        drawTextUV(ScreenResolutions[selectedScreenRes], SettingsAligner.x + ScreenToU(360), SettingsAligner.y + ScreenToV(90), 58);
+        SelectedScreenResDec = drawButtonUV(SelectedScreenResDec, "<", 48, Rectangle{SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(90), 80, SettingsAligner.height}, &decSelectedScreenRes);
+        isFullscreen = drawToggleUV(isFullscreen, "Fullscreen", 40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(210), 250, SettingsAligner.height }, &ToggleScreenReInit);
+        isMSAA4X     = drawToggleUV(isMSAA4X    , "MSAA 4x",    40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(270), 250, SettingsAligner.height }, &ToggleScreenReInit);
         // isVSync      = drawToggleUV(isVSync    , "VSync",      40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(260), 250, SettingsAligner.height }, &ToggleScreenReInit); 
     } else if (SoundTab){
         drawTextUV("Sound settings", SettingsAligner.x + ScreenToU(265), SettingsAligner.y, 60);
-        isMusicMute = drawToggleUV(isMusicMute, "Mute Music", 40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(140), 250, SettingsAligner.height });
-        isSoundMute = drawToggleUV(isSoundMute, "Mute Sound", 40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(200), 250, SettingsAligner.height });
+        isMusicMute = drawToggleUV(isMusicMute, "Mute Music", 40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(90), 250, SettingsAligner.height });
+        isSoundMute = drawToggleUV(isSoundMute, "Mute Sound", 40, Rectangle{ SettingsAligner.x + ScreenToU(265), SettingsAligner.y + ScreenToV(150), 250, SettingsAligner.height });
     } else if (AboutTab){
         drawTextUV("About", SettingsAligner.x + ScreenToU(265), SettingsAligner.y, 60);
     }

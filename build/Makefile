@@ -1,6 +1,6 @@
 # Specify platform
 # Win/Linux/Web/All (Web needs fixing)
-PLATFORM = Win# Default windows
+PLATFORM ?= Win# Default windows
 
 # Config Essentials
 PROJECT_NAME = Clean

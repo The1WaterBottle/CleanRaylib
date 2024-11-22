@@ -28,13 +28,6 @@ Rectangle SettingsAligner = { 0.01f, 0.02f, 120.0f, 50.0f };
 bool Settings_BackBtn = false, applyBtn = false, SettingsFromGameBool = false, isScreenReInit = false; 
 bool ScreenTab = true, SoundTab = false, AboutTab = false;
 
-void SaveSettings(){
-
-}
-void LoadSettings(){
-
-}
-
 void CloseSettings(){
     if(SettingsFromGameBool){
         ScreenIndex = 99;
@@ -45,6 +38,7 @@ void CloseSettings(){
 void ApplySettings(){
     SaveSettings();
     if(isScreenReInit){
+        currentScreenRes = selectedScreenRes;
         CloseWindow();
         InitWindow();
     }
@@ -63,6 +57,24 @@ void ClsBools_AboutTab(){
     ScreenTab = false;
     SoundTab = false;
     AboutTab = true;
+}
+
+void incSelectedScreenRes(){
+    if(selectedScreenRes < 8){
+        selectedScreenRes++;
+    } else{
+        selectedScreenRes = 0;
+    }
+    if(selectedScreenRes != currentScreenRes) isScreenReInit = true;
+}
+
+void decSelectedScreenRes(){
+    if(selectedScreenRes > 0){
+        selectedScreenRes--;
+    } else{
+        selectedScreenRes = 8;
+    }
+    if(selectedScreenRes != currentScreenRes) isScreenReInit = true;
 }
 
 void ToggleScreenReInit(){
