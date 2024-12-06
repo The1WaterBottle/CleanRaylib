@@ -38,7 +38,6 @@ void CloseSettings(){
 void ApplySettings(){
     SaveSettings();
     if(isScreenReInit){
-        currentScreenRes = selectedScreenRes;
         CloseWindow();
         InitWindow();
     }
@@ -60,6 +59,7 @@ void ClsBools_AboutTab(){
 }
 
 void incSelectedScreenRes(){
+    static unsigned short currentScreenRes = selectedScreenRes;
     if(selectedScreenRes < 8){
         selectedScreenRes++;
     } else{
@@ -69,6 +69,7 @@ void incSelectedScreenRes(){
 }
 
 void decSelectedScreenRes(){
+    static unsigned short currentScreenRes = selectedScreenRes;
     if(selectedScreenRes > 0){
         selectedScreenRes--;
     } else{

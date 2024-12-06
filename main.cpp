@@ -9,6 +9,8 @@ int main(void){
     InitWindow();
     InitAudio();
 
+    ConsoleWrite(sizeof(bool));
+
     // GameClock
     InitThreadByID(THREAD_GAME_TIMER);
 

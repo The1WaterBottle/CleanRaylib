@@ -10,6 +10,7 @@
 #include <chrono>       // pausing multithreading for FPS lock
 #include <future>       // for async multithreading
 #include <mutex>        // for locking/unlocking threads access to data
+#include <cstdint>      // used for 1 byte ints
 
 // #define GLSL_VERSION 100
 

@@ -7,13 +7,12 @@ void InitWindow(){ // Create window
         InitWindow(1280, 720, "Game - v0.0.1");
         ToggleFullscreen();
     } else {
-        SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-        InitWindow(screenReses[currentScreenRes].x, screenReses[currentScreenRes].y, "Game - v0.0.1");
+        // SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+        InitWindow(screenReses[selectedScreenRes].x, screenReses[selectedScreenRes].y, "Game - v0.0.1");
         SetWindowMinSize(1024, 768);
     }
-    SetWindowTitle("The Enchanted Realm - v0.0.1");
-    Image LogoImage = LoadImage("textures/misc/TER-Logo.png"); // Load game icon
-    SetWindowIcon(LogoImage);
+    SetWindowTitle("Game - v0.0.1");
+    SetWindowIcon(LoadImage("DATA/textures/misc/Logo.png")); // Load game icon
     SetExitKey(KEY_DELETE); // press DELETE if game crashes
     SetTargetFPS(TargetFPS);
     // store screen width and height into variables for UV_conversion.hpp
@@ -26,8 +25,8 @@ void InitAudio(){ // Create audio components
     ConsoleWrite("[ RUNNING ] Initializing Audio...");
 	InitAudioDevice();
     SetMasterVolume(MasterVol);
-    Music MainMusic = LoadMusicStream("sounds/music/");
-    Sound MainSound = LoadSound("sounds/sound/");
+    Music MainMusic = LoadMusicStream("DATA/sounds/music/");
+    Sound MainSound = LoadSound("DATA/sounds/sound/");
     SetMusicVolume(MainMusic, MusicVol);
     SetSoundVolume(MainSound, SoundVol);
     ConsoleWrite("[ FINISHED ] Initialized Audio\n");
